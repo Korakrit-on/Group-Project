@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 #define MAX 100
@@ -31,9 +32,6 @@ void deleteElement(double nums[], char ops[], int index, int *count) {
 }
 
 
-
-
-
 void process(double nums[], char ops[], int *count, const char *validOps) {
     int i = 0 ;
     
@@ -61,5 +59,41 @@ void process(double nums[], char ops[], int *count, const char *validOps) {
     }
 }
 int main() {
+    // 1. เตรียมข้อมูล
+    char input[MAX];
+    printf("Enter expression: ");
+    fgets(input, MAX, stdin); // รับค่าจากคีย์บอร์ด
+
+    double nums[MAX]; // เก็บตัวเลข
+    char ops[MAX];    // เก็บเครื่องหมาย
+    int count = 0;    // นับจำนวนตัวเลข
     
+    char *p = input;
+
+    // 2. ลูปอ่านค่า (ใช้ฟังก์ชันของคุณ + เก็บลง array)
+    while (*p != '\0' && *p != '\n') {
+
+        // 2.1 อ่านตัวเลขด้วยฟังก์ชันของคุณ
+        nums[count] = readFactor(&p);
+        count++;
+
+        // 2.3 เช็คว่าจบประโยคหรือยัง
+        if (*p == '\0' || *p == '\n') break;
+
+        // 2.4 อ่านเครื่องหมาย (Operator)
+        ops[count - 1] = *p; // เก็บเครื่องหมาย (index ของ ops จะตามหลัง nums อยู่ 1)
+        p++; // ขยับข้ามเครื่องหมายไป
+    }
+
+    // 3. เริ่มคำนวณ (ใช้ฟังก์ชันของเพื่อน)
+    // รอบที่ 1: คูณ หาร เปอร์เซ็นต์ ก่อน
+    process(nums, ops, &count, "*/%");
+    
+    // รอบที่ 2: บวก ลบ 
+    process(nums, ops, &count, "+-");
+
+    // 4. แสดงผลลัพธ์
+    printf("Result: %.2f\n", nums[0]);
+
+    return 0;
 }
