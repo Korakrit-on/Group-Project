@@ -1,23 +1,12 @@
 #include<stdio.h>
 #include <stdlib.h>
 
-
-
-double AddOperate(double a , double b , char operate) {
-    switch (operate)
-    {
-    case '+':
-        return a + b;
-    case '-':
-        return a - b;
-    case '*':
-        return a * b;
-    case '/':
-        return a / b;   
-    }
-    return 0; 
-
+// ฟังก์ชันตรวจสอบตัวเลข
+int isDigit(char c){
+    return(c >= '0' && c <= '9');
 }
+
+
 int main() {
-    
+ 
 }
