@@ -4,7 +4,6 @@
 int main() {
     float a, b, result ;
     char op ;
-    while(1) {
     printf("Enter numbers and an operator (+, -, *, /, %%): ") ;
     scanf("%f %c %f", &a, &op, &b) ;
     
@@ -22,16 +21,13 @@ int main() {
             result = a / b;
             break ;
         case '%':
-            result = a % b ;
+            result = a%b ;
             break ;
         default :
             printf("Error! Invalid operator.\n");
-            continue ;
-            
-    }
-    return 1 ;
+            return 1 ;
     }
 
-    printf("Result = %.2f\n", result) ;
+    printf("Result = %f\n", result) ;
     return 0 ;
 }
